@@ -5,17 +5,13 @@ sources:
       #For bigquery:
       database: dtc-de-course-375103
 
-      # For postgres:
-      database: production
-
-      schema: trips_data_all
+      schema: deZoomcampDatasetBQ
 
       # loaded_at_field: record_loaded_at
       tables:
-        - name: green_tripdata
-        - name: yellow_tripdata
-         # freshness:
-           # error_after: {count: 6, period: hour}
+        - name: greenTaxiParquet
+        - name: yellowTaxiParquet
+        - name: fhvTaxiParquet
 
 models:
     - name: stg_green_tripdata
@@ -109,6 +105,8 @@ models:
           - name: Total_amount 
             description: The total amount charged to passengers. Does not include cash tips.
 
+##############################################################################################
+
     - name: stg_yellow_tripdata
       description: > 
         Trips made by New York City's iconic yellow taxis. 
@@ -200,3 +198,31 @@ models:
             description: Total amount of all tolls paid in trip.
           - name: Total_amount 
             description: The total amount charged to passengers. Does not include cash tips.
+
+######################################################################################
+
+    - name: stg_fhv_tripdata  
+      description: >
+        For-Hire Vehicles (FHVs) provide pre-arranged transportation throughout New York City 
+        For-Hire trips are arranged through TLC licensed bases  
+        FHV bases accept trip requests from passengers, dispatch TLC licensed drivers in TLC licensed 
+        vehicles, and are responsible for collecting and paying taxes, as well as providing driver benefits.     
+      columns:
+          - name: tripid
+            description: Primary key for this table, generated with a concatenation of dispatching_base_num and pickup_datetime.
+          - name: dispatching_base_num 
+            description: The TLC Base License Number of the base that dispatched the trip.
+          - name: pickup_datetime 
+            description: The date and time when the meter was engaged.
+          - name: dropoff_datetime 
+            description: The date and time when the meter was disengaged.
+          - name: pickup_locationID
+            description: locationid where the meter was engaged.
+          - name: dropoff_locationID 
+            description: locationid where the meter was engaged.
+          - name: SR_Flag 
+            description: >
+                Indicates if the trip was a part of a shared ride chain offered by a
+                High Volume FHV company
+          - name: affiliated_base_number 
+            description: N/A
