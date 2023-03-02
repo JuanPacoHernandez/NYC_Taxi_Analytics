@@ -22,8 +22,6 @@ trips_unioned as (
     select * from green_data
     union all
     select * from yellow_data
-    union 
-    select * from fhv_data
 ), 
 
 dim_zones as (
