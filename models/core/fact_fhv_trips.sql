@@ -11,8 +11,8 @@ select
     dispatching_base_num,
     pickup_datetime,
     dropoff_datetime,
-    pickup_locationID,
-    dropoff_locationID,
+    pickup_locationid,
+    dropoff_locationid,
     SR_Flag,
     affiliated_base_number
 
