@@ -22,7 +22,7 @@ trips_unioned as (
     select * from green_data
     union all
     select * from yellow_data
-    union all
+    union 
     select * from fhv_data
 ), 
 
